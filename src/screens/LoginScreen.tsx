@@ -5,7 +5,6 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  ActivityIndicator,
   Alert,
   KeyboardAvoidingView,
   Platform,
@@ -16,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { authApi } from '../api';
 import { persistToken } from '../store/authSlice';
 import { theme } from '../theme';
+import { Button } from '../components/common';
 
 const LoginScreen: React.FC = () => {
   const dispatch = useDispatch();
@@ -126,17 +126,12 @@ const LoginScreen: React.FC = () => {
 
         {error ? <Text style={styles.error}>{error}</Text> : null}
 
-        <TouchableOpacity
-          style={[styles.button, loading && styles.buttonDisabled]}
+        <Button
+          title="Log In"
           onPress={handleLogin}
-          disabled={loading}
-        >
-          {loading ? (
-            <ActivityIndicator color="#fff" />
-          ) : (
-            <Text style={styles.buttonText}>Log In</Text>
-          )}
-        </TouchableOpacity>
+          loading={loading}
+          style={styles.button}
+        />
       </View>
     </KeyboardAvoidingView>
   );
@@ -165,9 +160,9 @@ const styles = StyleSheet.create({
   inputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: theme.colors.background,
     borderWidth: 1,
-    borderColor: '#E2E8F0',
+    borderColor: theme.colors.border,
     borderRadius: 28,
     paddingHorizontal: 20,
     marginBottom: 16,
@@ -188,19 +183,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button: {
-    backgroundColor: theme.colors.primary,
-    borderRadius: 28,
-    padding: 16,
-    alignItems: 'center',
     marginTop: 8,
-  },
-  buttonDisabled: {
-    opacity: 0.7,
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
   },
 });
 

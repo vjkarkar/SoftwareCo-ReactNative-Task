@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -10,7 +10,7 @@ import ErrorBoundary from './src/components/ErrorBoundary';
 function App(): React.JSX.Element {
     return (
         <ErrorBoundary>
-            <GestureHandlerRootView style={{ flex: 1 }}>
+            <GestureHandlerRootView style={styles.root}>
                 <Provider store={store}>
                     <SafeAreaProvider>
                         <StatusBar
@@ -24,5 +24,11 @@ function App(): React.JSX.Element {
         </ErrorBoundary>
     );
 }
+
+const styles = StyleSheet.create({
+    root: {
+        flex: 1,
+    },
+});
 
 export default App;

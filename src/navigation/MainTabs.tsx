@@ -12,25 +12,49 @@ const Tab = createBottomTabNavigator();
 const TabItem = ({
   focused,
   label,
-  iconName,
+  activeIconName,
+  inactiveIconName,
 }: {
   focused: boolean;
   label: string;
-  iconName: string;
+  activeIconName: string;
+  inactiveIconName: string;
 }) => {
   if (focused) {
     return (
       <View style={styles.activePill}>
-        <Icon name={iconName} size={14} color="#fff" />
+        <Icon name={activeIconName} size={14} color="#fff" />
         <Text style={styles.activeLabel}>{label}</Text>
       </View>
     );
   }
 
   return (
-    <Icon name={iconName} size={16} color="#0F172A" style={styles.inactiveIcon} />
+    <Icon name={inactiveIconName} size={16} color="#0F172A" style={styles.inactiveIcon} />
   );
 };
+
+const renderHomeTabIcon = ({ focused }: { focused: boolean }) => (
+  <TabItem
+    focused={focused}
+    label="Home"
+    activeIconName="home"
+    inactiveIconName="home-outline"
+  />
+);
+
+const renderProfileTabIcon = ({ focused }: { focused: boolean }) => (
+  <TabItem
+    focused={focused}
+    label="Profile"
+    activeIconName="person"
+    inactiveIconName="person-outline"
+  />
+);
+
+const renderHomeHeader = ({ options }: { options: { title?: string } }) => (
+  <Header title={options.title ?? 'SoftwareCo'} />
+);
 
 const MainTabs: React.FC = () => {
   return (
@@ -53,12 +77,8 @@ const MainTabs: React.FC = () => {
         options={{
           title: 'SoftwareCo',
           tabBarLabel: 'Home',
-          tabBarIcon: ({ focused }) => (
-            <TabItem focused={focused} label="Home" iconName="home-outline" />
-          ),
-          header: ({ options }) => (
-            <Header title={options.title ?? 'SoftwareCo'} />
-          ),
+          tabBarIcon: renderHomeTabIcon,
+          header: renderHomeHeader,
         }}
       />
       <Tab.Screen
@@ -67,9 +87,7 @@ const MainTabs: React.FC = () => {
         options={{
           title: 'Profile',
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ focused }) => (
-            <TabItem focused={focused} label="Profile" iconName="person-outline" />
-          ),
+          tabBarIcon: renderProfileTabIcon,
           headerShown: false,
         }}
       />

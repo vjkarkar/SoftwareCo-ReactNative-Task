@@ -3,19 +3,17 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
   StyleSheet,
   RefreshControl,
   ImageBackground,
   ActivityIndicator,
-  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { storesApi } from '../api';
 import { theme } from '../theme';
+import { Card } from '../components/common';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const CARD_IMAGE_HEIGHT = 180;
 const FALLBACK_IMAGE = require('../assets/images/slider1.png');
 
@@ -87,8 +85,9 @@ const StoresScreen: React.FC = () => {
   };
 
   const renderStoreCard = ({ item }: { item: StoreItem }) => (
-    <TouchableOpacity
+    <Card
       style={styles.card}
+      contentStyle={styles.cardInner}
       onPress={() => handleStorePress(item._id)}
       activeOpacity={0.9}
     >
@@ -115,7 +114,7 @@ const StoresScreen: React.FC = () => {
           {renderStars(4.5)}
         </View>
       </View>
-    </TouchableOpacity>
+    </Card>
   );
 
   if (loading && !refreshing) {
@@ -158,6 +157,7 @@ const styles = StyleSheet.create({
   card: {
     marginBottom: 16,
   },
+  cardInner: {},
   imageWrap: {
     position: 'relative',
     borderRadius: 16,

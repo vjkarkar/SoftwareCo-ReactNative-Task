@@ -13,12 +13,12 @@ let authToken: string | null = null;
 
 export const setAuthToken = (token: string) => {
   authToken = token;
-  apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 export const clearAuthToken = () => {
   authToken = null;
-  delete apiClient.defaults.headers.common['Authorization'];
+  delete apiClient.defaults.headers.common.Authorization;
 };
 
 export const getAuthToken = () => authToken;

@@ -28,6 +28,7 @@ const CARD_WIDTH = 200;
 const CHART_COLORS = ['#22C55E', '#38BDF8', '#A78BFA', '#FB923C', '#F87171'];
 
 const FALLBACK_IMAGE = require('../assets/images/slider1.png');
+const LIST_ITEM_SEPARATOR = () => <View style={styles.itemSeparator} />;
 
 type StatsPeriod = 'daily' | 'weekly' | 'monthly';
 
@@ -230,7 +231,7 @@ const HomeScreen: React.FC = () => {
             }
         >
             {/* Hot deals slider */}
-            <Text style={[styles.sectionTitle, { marginTop: 20 }]}>Hot deals</Text>
+            <Text style={[styles.sectionTitle, styles.hotDealsTitle]}>Hot deals</Text>
             {offers.length > 0 ? (
                 <>
                     <FlatList
@@ -247,7 +248,7 @@ const HomeScreen: React.FC = () => {
                         keyExtractor={(item) => item.id}
                         renderItem={renderSliderItem}
                         contentContainerStyle={styles.sliderList}
-                        ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+                        ItemSeparatorComponent={LIST_ITEM_SEPARATOR}
                     />
                     <View style={styles.pagination}>
                         {offers.map((_, i) => (
@@ -282,7 +283,7 @@ const HomeScreen: React.FC = () => {
                     keyExtractor={(item) => item.id}
                     renderItem={renderStoreItem}
                     contentContainerStyle={styles.storesList}
-                    ItemSeparatorComponent={() => <View style={{ width: 16 }} />}
+                    ItemSeparatorComponent={LIST_ITEM_SEPARATOR}
                 />
             ) : (
                 <View style={styles.emptySection}>
@@ -403,9 +404,15 @@ const styles = StyleSheet.create({
         marginBottom: 12,
         paddingHorizontal: 16,
     },
+    hotDealsTitle: {
+        marginTop: 20,
+    },
     sliderList: {
         paddingHorizontal: 16,
         paddingBottom: 12,
+    },
+    itemSeparator: {
+        width: 16,
     },
     sliderCard: {
         width: SLIDER_WIDTH,

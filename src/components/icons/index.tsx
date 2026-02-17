@@ -5,27 +5,27 @@ import { theme } from '../../theme';
 const ICON_SIZE = 24;
 
 export const EnvelopeIcon: React.FC<{ color?: string }> = ({
-  color = theme.colors.textMuted,
+  color: _color = theme.colors.textMuted,
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 18, color }}>✉</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text18}>✉</Text>
   </View>
 );
 
 export const LockIcon: React.FC<{ color?: string }> = ({
-  color = theme.colors.textMuted,
+  color: _color = theme.colors.textMuted,
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 18, color }}>🔒</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text18}>🔒</Text>
   </View>
 );
 
 export const UserIcon: React.FC<{ color?: string; size?: number }> = ({
-  color = theme.colors.primary,
-  size = ICON_SIZE,
+  color: _color = theme.colors.primary,
+  size: _size = ICON_SIZE,
 }) => (
-  <View style={[s.wrapper, { width: size, height: size }]}>
-    <Text style={{ fontSize: size - 6, color }}>👤</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text18}>👤</Text>
   </View>
 );
 
@@ -33,8 +33,8 @@ export const HomeIcon: React.FC<{ color?: string; filled?: boolean }> = ({
   color: _color = theme.colors.primary,
   filled = false,
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 20, opacity: filled ? 1 : 0.6 }}>🏠</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={[s.text20, !filled && s.iconFaded]}>🏠</Text>
   </View>
 );
 
@@ -42,8 +42,8 @@ export const BellIcon: React.FC<{ color?: string; badge?: boolean }> = ({
   color: _color = theme.colors.textSecondary,
   badge = false,
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 20 }}>🔔</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text20}>🔔</Text>
     {badge && <View style={s.badge} />}
   </View>
 );
@@ -51,49 +51,49 @@ export const BellIcon: React.FC<{ color?: string; badge?: boolean }> = ({
 export const MicrophoneIcon: React.FC<{ color?: string }> = ({
   color: _color = '#FFFFFF',
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 20 }}>🎤</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text20}>🎤</Text>
   </View>
 );
 
 export const ChevronRightIcon: React.FC<{ color?: string }> = ({
-  color = theme.colors.textMuted,
+  color: _color = theme.colors.textMuted,
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 16, color }}>›</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text16}>›</Text>
   </View>
 );
 
 export const PauseIcon: React.FC<{ color?: string }> = ({
-  color = '#FFFFFF',
+  color: _color = '#FFFFFF',
 }) => (
-  <View style={[s.wrapper, s.pause, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <View style={[s.pauseBar, { backgroundColor: color }]} />
-    <View style={[s.pauseBar, { backgroundColor: color }]} />
+  <View style={[s.wrapper, s.pause, s.iconSize]}>
+    <View style={s.pauseBar} />
+    <View style={s.pauseBar} />
   </View>
 );
 
 export const StopIcon: React.FC<{ color?: string }> = ({
-  color = '#FFFFFF',
+  color: _color = '#FFFFFF',
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <View style={[s.stopSquare, { backgroundColor: color }]} />
+  <View style={[s.wrapper, s.iconSize]}>
+    <View style={s.stopSquare} />
   </View>
 );
 
 export const SaveIcon: React.FC<{ color?: string }> = ({
   color: _color = '#FFFFFF',
 }) => (
-  <View style={[s.wrapper, { width: ICON_SIZE, height: ICON_SIZE }]}>
-    <Text style={{ fontSize: 18 }}>💾</Text>
+  <View style={[s.wrapper, s.iconSize]}>
+    <Text style={s.text18}>💾</Text>
   </View>
 );
 
 export const StarIcon: React.FC<{ color?: string }> = ({
   color: _color = theme.colors.accent,
 }) => (
-  <View style={[s.wrapper, { width: 16, height: 16 }]}>
-    <Text style={{ fontSize: 12 }}>★</Text>
+  <View style={[s.wrapper, s.iconSizeSmall]}>
+    <Text style={s.text12}>★</Text>
   </View>
 );
 
@@ -101,6 +101,29 @@ const s = StyleSheet.create({
   wrapper: {
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  iconSize: {
+    width: ICON_SIZE,
+    height: ICON_SIZE,
+  },
+  iconSizeSmall: {
+    width: 16,
+    height: 16,
+  },
+  text20: {
+    fontSize: 20,
+  },
+  text18: {
+    fontSize: 18,
+  },
+  text16: {
+    fontSize: 16,
+  },
+  text12: {
+    fontSize: 12,
+  },
+  iconFaded: {
+    opacity: 0.6,
   },
   badge: {
     position: 'absolute',
@@ -120,10 +143,12 @@ const s = StyleSheet.create({
     width: 4,
     height: 14,
     borderRadius: 2,
+    backgroundColor: '#FFFFFF',
   },
   stopSquare: {
     width: 14,
     height: 14,
     borderRadius: 2,
+    backgroundColor: '#FFFFFF',
   },
 });

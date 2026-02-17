@@ -6,14 +6,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  Image,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { clearStoredToken } from '../store/authSlice';
 import { theme } from '../theme';
-import { ChevronRightIcon } from '../components/icons';
 import SubHeader from '../components/SubHeader';
+import ProfileMenuItem from '../components/ProfileMenuItem';
 
 const MENU_ITEMS = [
   { id: 'audio', label: 'Audio Recording', image: require('../assets/images/microphone-2.png'), screen: 'AudioRecording' },
@@ -35,10 +34,6 @@ const ProfileScreen: React.FC = () => {
     ]);
   };
 
-  const handleBack = () => {
-    navigation.navigate('Home');
-  };
-
   const handleItemPress = (item: (typeof MENU_ITEMS)[0]) => {
     if (item.screen) {
       navigation.navigate(item.screen);
@@ -51,7 +46,7 @@ const ProfileScreen: React.FC = () => {
     <View style={styles.container}>
       <SubHeader
         title="Profile"
-        onBack={handleBack}
+        showBack={false}
         rightAction={
           <TouchableOpacity onPress={handleLogout}>
             <Text style={styles.logoutText}>Logout</Text>
@@ -66,20 +61,12 @@ const ProfileScreen: React.FC = () => {
         showsVerticalScrollIndicator={false}
       >
         {MENU_ITEMS.map(item => (
-          <TouchableOpacity
+          <ProfileMenuItem
             key={item.id}
-            style={styles.menuItem}
+            label={item.label}
+            image={item.image}
             onPress={() => handleItemPress(item)}
-            activeOpacity={0.7}
-          >
-            <Image
-              source={item.image}
-              style={styles.menuIcon}
-              resizeMode="contain"
-            />
-            <Text style={styles.menuLabel}>{item.label}</Text>
-            <ChevronRightIcon />
-          </TouchableOpacity>
+          />
         ))}
       </ScrollView>
     </View>
@@ -95,24 +82,6 @@ const styles = StyleSheet.create({
   },
   scroll: { flex: 1 },
   content: { paddingBottom: 100 },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: theme.spacing.md,
-    paddingHorizontal: theme.spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.colors.border,
-  },
-  menuIcon: {
-    width: 22,
-    height: 22,
-    marginRight: theme.spacing.md,
-  },
-  menuLabel: {
-    flex: 1,
-    fontSize: 16,
-    color: theme.colors.textPrimary,
-  },
 });
 
 export default ProfileScreen;

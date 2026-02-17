@@ -6,14 +6,13 @@ import {
   ScrollView,
   ActivityIndicator,
   ImageBackground,
-  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { storesApi } from '../api';
 import { theme } from '../theme';
+import { Card } from '../components/common';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const HEADER_HEIGHT = 280;
 const FALLBACK_IMAGE = require('../assets/images/slider1.png');
 
@@ -109,7 +108,7 @@ const StoreDetailScreen: React.FC = () => {
       </View>
 
       {/* Store section */}
-      <View style={styles.sectionCard}>
+      <Card style={styles.sectionCard} contentStyle={styles.sectionCardContent}>
         <Text style={styles.sectionTitle}>Store</Text>
         <View style={styles.addressRow}>
           <Icon
@@ -122,10 +121,10 @@ const StoreDetailScreen: React.FC = () => {
             {store.location?.address || 'Address not available'}
           </Text>
         </View>
-      </View>
+      </Card>
 
       {/* Map section */}
-      <View style={styles.sectionCard}>
+      <Card style={styles.sectionCard} contentStyle={styles.sectionCardContent}>
         <Text style={styles.sectionTitle}>Map</Text>
         <View style={styles.mapContainer}>
           <View style={styles.mapPlaceholder}>
@@ -140,7 +139,7 @@ const StoreDetailScreen: React.FC = () => {
             )}
           </View>
         </View>
-      </View>
+      </Card>
     </ScrollView>
   );
 };
@@ -216,9 +215,14 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   sectionCard: {
-    backgroundColor: theme.colors.surface,
     marginHorizontal: 16,
     marginTop: 16,
+    borderRadius: 16,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  },
+  sectionCardContent: {
+    backgroundColor: theme.colors.surface,
     padding: 20,
     borderRadius: 16,
     borderTopLeftRadius: 20,

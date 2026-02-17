@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { notificationsApi } from '../api';
 import { theme } from '../theme';
+import { Card } from '../components/common';
 
 type NotificationPreference = {
   _id: string;
@@ -90,7 +91,7 @@ const ManageNotificationsScreen: React.FC = () => {
         </View>
       ) : (
         items.map(item => (
-          <View key={item._id} style={styles.card}>
+          <Card key={item._id} style={styles.card} contentStyle={styles.cardContent}>
             <View style={styles.titleRow}>
               <View style={styles.titleWrap}>
                 <Text style={styles.title} numberOfLines={1}>
@@ -166,7 +167,7 @@ const ManageNotificationsScreen: React.FC = () => {
                 <Text style={styles.channelLabel}>Sms</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </Card>
         ))
       )}
     </ScrollView>
@@ -197,13 +198,14 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
   },
   card: {
-    backgroundColor: '#FFFFFF',
     borderRadius: 8,
     borderWidth: 1,
     borderColor: '#B8BEC7',
+    marginBottom: 14,
+  },
+  cardContent: {
     paddingHorizontal: 12,
     paddingVertical: 10,
-    marginBottom: 14,
   },
   titleRow: {
     flexDirection: 'row',

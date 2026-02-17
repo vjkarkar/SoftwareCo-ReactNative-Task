@@ -89,19 +89,24 @@ APK output: `android/app/build/outputs/apk/release/app-release.apk`
 
 ```
 src/
-├── api/          # API client & endpoints
-├── components/   # AudioRecorderSection, NotificationsSection
-├── navigation/   # Auth, Main stack, Tabs
-├── screens/      # Login, Home, Stores, StoreDetail, Profile
-├── store/        # Redux slices (auth, notifications)
-└── types/        # TypeScript types
+├── api/               # API client + endpoint modules
+├── components/
+│   ├── common/        # Reusable primitives (Button, Card, AppHeader)
+│   ├── icons/         # Shared icon components
+│   └── *.tsx          # Feature-level shared UI sections
+├── constants/         # Shared colors/layout constants
+├── navigation/        # Auth, Main stack, Tabs
+├── screens/           # Login, Home, Stores, StoreDetail, Profile
+├── store/             # Redux slices (auth, notifications)
+├── theme/             # Theme object composed from constants
+└── types/             # TypeScript types
 assets/
 └── lottie/       # Lottie animation JSONs
 ```
 
 ## Environment
 
-- Node: v18+
+- Node: v20+
 - npm: v9+
 - React Native CLI
 - Android Studio (latest)
@@ -110,7 +115,14 @@ assets/
 ## Demo Credentials
 
 Username: user1  
-Password: passwor
+Password: password
+
+## Refactor Notes
+
+- Reworked core UI into reusable primitives (`Button`, `Card`, `AppHeader`).
+- Centralized design tokens into `constants` and consumed them through `theme`.
+- Removed inline styles from screen-level list separators and shared icon components.
+- Improved consistency for naming and imports by using `components/common` across screens.
 
 ## APK
 
